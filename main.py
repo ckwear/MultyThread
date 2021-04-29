@@ -23,22 +23,23 @@ from threading import Lock
 import threading
 
 sem = threading.Semaphore(3)      # 세마포 객체 생성, 3개의 쓰레드로 제한
-
+kk =Lock()
 class RestrictedArea(threading.Thread):
     def run(self):
-        print(all_parmas)
+
         global all_parmas
+        # print(all_parmas)
         for parmas in all_parmas:
             msg = 'Threading Semaphore TEST : %s' % self.getName()
             try:
                 sem.acquire()
-                Lock.acquire()
-                print(msg)
+                kk.acquire()
+                print(parmas)
                 if parmas['using_state'] == False:
                     parmas['using_state'] = True
                     print(parmas)
             finally:
-                Lock.release()
+                kk.release()
                 sem.release()
 
 threads = []
